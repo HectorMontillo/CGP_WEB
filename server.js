@@ -8,7 +8,7 @@ const routes = require("./network/routes");
 const db = require("./db");
 
 db(
-  "mongodb+srv://user:user1234@cluster0-lsrfs.mongodb.net/test?retryWrites=true&w=majority"
+  "mongodb+srv://user:user1234@cluster0-lsrfs.mongodb.net/cgpweb?retryWrites=true&w=majority"
 );
 
 app.use(bodyParser.json());
