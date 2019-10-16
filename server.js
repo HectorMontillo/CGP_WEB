@@ -15,6 +15,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/app", express.static("public"));
+
+app.get("/", (req, res) => {
+    res.send("Welcome to a basic express App");
+});
+
 routes(app);
 
 const port = process.env.PORT || 3000;
