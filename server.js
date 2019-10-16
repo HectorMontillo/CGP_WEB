@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/app", express.static("public"));
 routes(app);
 
-server.listen(3000, () => {
-  console.log(`El servidor esta escuchando en el puerto 3000`);
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+  console.log(`El servidor esta escuchando en el puerto ${port}`);
 });
