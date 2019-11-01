@@ -16,6 +16,16 @@
           "src": "/user/(?<id>[^/]*)",
           "dest": "/server.js",
           "methods": ["GET"]
+        },
+        {
+          "src": "/user/(?<id>[^/]*)",
+          "dest": "/server.js",
+          "methods": ["DELETE"]
+        },
+        {
+          "src": "/user/(?<id>[^/]*)",
+          "dest": "/server.js",
+          "methods": ["PUT"]
         }
 
       ]
