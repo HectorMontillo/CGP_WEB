@@ -13,7 +13,7 @@
           "methods": ["POST"]
         },
         {
-          "src": "/user:idUser",
+          "src": "/user/(?<id>[^/]*)",
           "dest": "/server.js",
           "methods": ["GET"]
         }
