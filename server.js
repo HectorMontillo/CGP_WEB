@@ -3,19 +3,21 @@ const app = express();
 const server = require("http").Server(app);
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const routes = require("./network/routes");
 
 const db = require("./db");
 
 db(
   "mongodb+srv://user:user1234@cluster0-lsrfs.mongodb.net/cgpweb?retryWrites=true&w=majority"
 );
-app.use(cors());
+//app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const routes = require("./network/routes");
 app.use("/app", express.static("public"));
 
+app.options("*", cors());
+/*
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -31,7 +33,7 @@ app.use((req, res, next) => {
 
   return next();
 });
-
+*/
 app.get("/", (req, res) => {
   res.send("Welcome to a basic express App");
 });
