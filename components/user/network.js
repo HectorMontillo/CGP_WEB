@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
   controller
     .addUser(req.body)
     .then(data => {
-      response.success(req, res, data, 200);
+      response.success(req, res, data, 201);
     })
     .catch(e => {
       response.error(
@@ -49,7 +49,8 @@ router.post("/", (req, res) => {
         res,
         e,
         500,
-        "Ocurrio un error en el creando un nuevo usuario"
+        "Ocurrio un error en el creando un nuevo usuario " +
+          (e.errmsg || e.message)
       );
     });
 });

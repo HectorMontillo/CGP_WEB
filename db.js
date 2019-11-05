@@ -7,7 +7,8 @@ db.Promise = global.Promise; //TODO Investigar que hace esta vaina
 async function connect(url) {
   await db.connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
   });
   console.log("[db] conectada con éxito");
 }
