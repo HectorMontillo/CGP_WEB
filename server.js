@@ -4,8 +4,6 @@ const server = require("http").Server(app);
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const routes = require("./network/routes");
-
 const db = require("./db");
 
 db(
@@ -15,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const routes = require("./network/routes");
 app.use("/app", express.static("public"));
 
 app.get("/", (req, res) => {
