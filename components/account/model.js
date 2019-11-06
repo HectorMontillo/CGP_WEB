@@ -10,8 +10,8 @@ const mySchema = new Schema({
   notes: String,
   accountNumber: String,
   colors: {
-    start: String, // Color inicio del bg de la cuenta
-    end: String // Color final del bg de la cuenta
+    start: Number, // Color inicio del bg de la cuenta
+    end: Number // Color final del bg de la cuenta
   },
   accountType: {
     type: String,
