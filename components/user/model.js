@@ -25,14 +25,15 @@ const mySchema = new Schema({
       type: Schema.ObjectId,
       ref: "Account"
     }
-  ]
-  /*
+  ],
+
   groups: [
     {
       type: Schema.ObjectId,
       ref: "Group"
     }
-  ],
+  ]
+  /*
   budgets: [
     {
       type: Schema.ObjectId,

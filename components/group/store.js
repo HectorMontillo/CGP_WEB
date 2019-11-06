@@ -1,7 +1,7 @@
 const Model = require("./model");
 const userModel = require("../user/model");
 
-function listAccounts(query, idUser) {
+function listGroups(query, idUser) {
   return new Promise((resolve, rejec) => {
     let filter = {};
     if (idUser) {
@@ -11,24 +11,24 @@ function listAccounts(query, idUser) {
     }
     userModel
       .find(filter)
-      .populate("accounts")
+      .populate("groups")
       .exec((err, data) => {
         if (err) {
           rejec(err);
         } else {
-          resolve(data[0].accounts);
+          resolve(data[0].groups);
         }
       });
   });
 }
 
-function addAccount(account, idUser) {
+function addGroup(group, idUser) {
   return new Promise((resolve, rejec) => {
-    const myAccount = new Model(account);
-    myAccount
+    const myGroup = new Model(group);
+    myGroup
       .save()
       .then(data => {
-        updateUserAccounts(idUser, data._id)
+        updateUserGroups(idUser, data._id)
           .then(update => {
             resolve(data);
           })
@@ -42,7 +42,7 @@ function addAccount(account, idUser) {
   });
 }
 
-function updateUserAccounts(idUser, newIdAccount) {
+function updateUserGroups(idUser, newIdGroup) {
   return new Promise((resolve, rejec) => {
     let filter = {};
     if (idUser) {
@@ -51,7 +51,7 @@ function updateUserAccounts(idUser, newIdAccount) {
       };
     }
     userModel
-      .findOneAndUpdate(filter, { $push: { accounts: newIdAccount } })
+      .findOneAndUpdate(filter, { $push: { groups: newIdGroup } })
       .then(data => {
         resolve(data);
       })
@@ -62,6 +62,6 @@ function updateUserAccounts(idUser, newIdAccount) {
 }
 
 module.exports = {
-  listAccounts,
-  addAccount
+  listGroups,
+  addGroup
 };

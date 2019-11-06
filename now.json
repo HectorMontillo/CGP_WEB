@@ -21,6 +21,11 @@
       "src": "/account/(?<id>[^/]*)",
       "dest": "/server.js",
       "methods": ["GET", "POST"]
+    },
+    {
+      "src": "/group/(?<id>[^/]*)",
+      "dest": "/server.js",
+      "methods": ["GET", "POST"]
     }
   ]
 }
