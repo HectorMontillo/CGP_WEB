@@ -10,14 +10,14 @@ const db = require("./db");
 db(
   "mongodb+srv://user:user1234@cluster0-lsrfs.mongodb.net/cgpweb?retryWrites=true&w=majority"
 );
-//app.use();
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/app", express.static("public"));
 
-app.options("*", cors());
-app.get("/", cors(), (req, res) => {
+//app.options("*", cors());
+app.get("/", (req, res) => {
   res.send("Welcome to a basic express App");
 });
 
