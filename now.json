@@ -28,8 +28,8 @@
       "methods": ["GET", "POST"]
     },
     {
-      "src": "/(.*)",
-      "dest": "/200.js",
+      "src": "/user",
+      "dest": "/server.js",
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "OPTIONS",
