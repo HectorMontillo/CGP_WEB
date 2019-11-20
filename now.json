@@ -26,6 +26,16 @@
       "src": "/group/(?<id>[^/]*)",
       "dest": "/server.js",
       "methods": ["GET", "POST"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "200.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+      },
+      "methods": ["OPTIONS"]
     }
   ]
 }
