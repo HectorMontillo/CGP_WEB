@@ -7,8 +7,8 @@ const mySchema = new Schema({
     required: true
   },
   colors: {
-    start: String, // Color inicio del bg del grupo
-    end: String // Color final del bg del grupo
+    start: Number, // Color inicio del bg del grupo
+    end: Number // Color final del bg del grupo
   },
   accounts: [
     {

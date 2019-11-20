@@ -22,7 +22,7 @@ router.get("/:idUser", (req, res) => {
 
 router.post("/:idUser", (req, res) => {
   controller
-    .addAccount(req.body, req.params.idUser)
+    .addAccount(req.body, req.params.idUser, req.body.groupId)
     .then(data => {
       response.success(req, res, data, 200);
     })

@@ -10,7 +10,11 @@ const db = require("./db");
 db(
   "mongodb+srv://user:user1234@cluster0-lsrfs.mongodb.net/cgpweb?retryWrites=true&w=majority"
 );
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://cgp-web.hecodes98.now.sh/"
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

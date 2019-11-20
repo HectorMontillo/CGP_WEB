@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const Joi = require("joi");
+/*
+const JoiSchema = Joi.object().keys({
+  fullname: Joi.string().regex()
+})*/
 
+const Schema = mongoose.Schema;
 const mySchema = new Schema({
   fullname: {
     type: String,

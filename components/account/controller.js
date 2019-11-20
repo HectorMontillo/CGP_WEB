@@ -4,11 +4,11 @@ function listAccounts(query, idUser) {
   return store.listAccounts(query, idUser);
 }
 
-function addAccount(account, idUser) {
+function addAccount(account, idUser, idGroup) {
   if (!account) {
     return Promise.reject("Invalid Account");
   }
-  return store.addAccount(account, idUser);
+  return store.addAccount(account, idUser, idGroup);
 }
 module.exports = {
   listAccounts,
