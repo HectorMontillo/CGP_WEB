@@ -12,7 +12,8 @@ db(
 );
 app.use(
   cors({
-    origin: "https://cgp-web.hecodes98.now.sh/"
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE, OPTIONS"
   })
 );
 app.use(bodyParser.json());
