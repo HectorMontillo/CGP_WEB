@@ -3,6 +3,10 @@ const router = express.Router();
 const response = require("../../network/response");
 const controller = require("./controller");
 
+router.options("*", (req, res) => {
+  response.success(req, res, "Bebecita", 200);
+});
+
 router.get("/:idUser", (req, res) => {
   controller
     .listGroups(req.query, req.params.idUser)
