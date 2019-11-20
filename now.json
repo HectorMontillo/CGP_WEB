@@ -29,7 +29,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "200.js",
+      "dest": "/200.js",
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "OPTIONS",
