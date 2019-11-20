@@ -31,19 +31,22 @@ function addAccount(account, idUser, idGroup) {
       .then(data => {
         updateUserAccounts(idUser, data._id)
           .then(update => {
+            console.log("Resolví UpdateUserAcc");
             resolve(data);
           })
           .catch(e => {
+            console.log("Reject UpdateUserAcc " + e);
             rejec(e);
           });
       })
       .catch(e => {
+        console.log("Reject Saving");
         rejec(e);
       });
   });
 }
 
-function updateUserAccounts(idUser, newIdAccount) {
+function updateGroupAccounts(idGroup, newIdAccount) {
   return new Promise((resolve, rejec) => {
     let filter = {};
     if (idGroup) {
@@ -54,15 +57,16 @@ function updateUserAccounts(idUser, newIdAccount) {
     groupModel
       .findOneAndUpdate(filter, { $push: { accounts: newIdAccount } })
       .then(data => {
+        console.log("Resolví UpdateUserAcc in");
         resolve(data);
       })
       .catch(e => {
+        console.log("Reject UpdateUserAcc in " + e);
         rejec(e);
       });
   });
 }
-
-function updateGroupAccounts(idGroup, newIdAccount) {
+function updateUserAccounts(idUser, newIdAccount) {
   return new Promise((resolve, rejec) => {
     let filter = {};
     if (idUser) {

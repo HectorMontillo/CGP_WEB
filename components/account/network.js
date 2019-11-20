@@ -36,7 +36,7 @@ router.post("/:idUser", (req, res) => {
         res,
         e,
         500,
-        "Ocurrio un error en el creando un nuevo usuario"
+        "Ocurrio un error en el creando una nueva cuenta"
       );
     });
 });
