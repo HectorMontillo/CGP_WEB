@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const mySchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   colors: {
     start: Number, // Color inicio del bg del grupo
