@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const response = require("../../network/response");
+const joiValidation = require("../../network/middleware");
+const joiSchema = require("./validation");
 const controller = require("./controller");
 
 router.options("*", (req, res) => {
@@ -41,7 +43,7 @@ router.get("/:idUser", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", joiValidation(joiSchema), (req, res) => {
   controller
     .addUser(req.body)
     .then(data => {
