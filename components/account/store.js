@@ -23,6 +23,21 @@ function listAccounts(query, idUser) {
   });
 }
 
+function getAccount(idAccount) {
+  return new Promise((resolve, rejec) => {
+    let filter = {
+      _id: idAccount ? idAccount : ""
+    };
+    Model.find(filter)
+      .then(data => {
+        resolve(data);
+      })
+      .catch(e => {
+        rejec(e);
+      });
+  });
+}
+
 function addAccount(account, idUser, idGroup) {
   return new Promise((resolve, rejec) => {
     const myAccount = new Model(account);
@@ -87,5 +102,6 @@ function updateUserAccounts(idUser, newIdAccount) {
 
 module.exports = {
   listAccounts,
-  addAccount
+  addAccount,
+  getAccount
 };

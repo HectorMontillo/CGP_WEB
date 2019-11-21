@@ -5,9 +5,11 @@ function listUsers(query) {
 }
 
 function addUser(user) {
-  //TODO Se debe validar la información que viene desde el body del req
   if (!user) {
     return Promise.reject("Invalid User");
+  }
+  if (user.fullname) {
+    user.fullname = user.fullname.replace(" ", "-");
   }
   return store.addUser(user);
 }

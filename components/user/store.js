@@ -14,8 +14,24 @@ function listUsers(query) {
 }
 
 function addUser(user) {
-  const myUser = new Model(user);
-  return myUser.save();
+  return new Promise((resolve, rejec) => {
+    const myUser = new Model(user);
+    return myUser
+      .save()
+      .then(data => {
+        resolve(data);
+      })
+      .catch(e => {
+        console.log(e);
+        if (e.name == "MongoError" && e.code == "11000") {
+          rejec(
+            "Occurrió un error inesperado, comunicate con el soporte técnico!!"
+          );
+        } else {
+          rejec(e);
+        }
+      });
+  });
 }
 
 function getUser(idUser) {

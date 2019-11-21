@@ -24,6 +24,23 @@ router.get("/:idUser", (req, res) => {
     });
 });
 
+router.get("/search/:idAccount", (req, res) => {
+  controller
+    .getAccount(req.params.idAccount)
+    .then(data => {
+      response.success(req, res, data, 200);
+    })
+    .catch(e => {
+      response.error(
+        req,
+        res,
+        e,
+        500,
+        "Ocurrio un error obteniendo informacion de Cuenta"
+      );
+    });
+});
+
 router.post("/:idUser", (req, res) => {
   controller
     .addAccount(req.body, req.params.idUser, req.body.groupId)
