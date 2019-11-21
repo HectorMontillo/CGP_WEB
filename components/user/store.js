@@ -65,7 +65,13 @@ function updateUser(idUser, updateData) {
         resolve(data);
       })
       .catch(e => {
-        rejec(e);
+        if (e.name == "MongoError" && e.code == "11000") {
+          rejec(
+            "Occurrió un error inesperado, comunicate con el soporte técnico!!"
+          );
+        } else {
+          rejec(e);
+        }
       });
   });
 }
