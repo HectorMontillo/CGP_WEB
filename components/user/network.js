@@ -43,7 +43,7 @@ router.get("/:idUser", (req, res) => {
     });
 });
 
-router.post("/", joiValidation(joiSchema), (req, res) => {
+router.post("/", joiValidation(joiSchema, "body"), (req, res) => {
   controller
     .addUser(req.body)
     .then(data => {
@@ -61,7 +61,7 @@ router.post("/", joiValidation(joiSchema), (req, res) => {
     });
 });
 
-router.put("/:idUser", (req, res) => {
+router.put("/:idUser", joiValidation(joiSchema, "body"), (req, res) => {
   controller
     .updateUser(req.params.idUser, req.body)
     .then(data => {

@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const JoiSchema = Joi.object().keys({
   fullname: Joi.string()
-    .regex(/^[a-zA-Z]+$/)
+    .regex(/^[a-zA-Z]+\s?([a-zA-Z]+\s?)+$/)
     .min(3)
     .required(),
   doc: Joi.string()
