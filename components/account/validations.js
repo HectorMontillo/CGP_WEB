@@ -148,9 +148,31 @@ const JoiSchema = Joi.object().keys({
         }
       });
     }),
-  /*
-  savingAccount: Joi.object().keys()
-  */
+
+  savingAccount: Joi.object().keys({
+    balance: Joi.number()
+      .min(-999999999)
+      .max(999999999)
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.type) {
+            case "any.empty":
+              err.message = "Pon dinero en tu cuenta!!";
+              break;
+            case "number.max":
+              err.message = `Tu cuenta no debe contener más de ${err.context.limit} $`;
+              break;
+            case "number.min":
+              err.message = `Tu cuenta no debe menos de ${err.context.limit} $`;
+              break;
+            default:
+              err.message = "Oh oh, hay algo mal con el balance de tu cuenta";
+              break;
+          }
+        });
+      })
+  }),
+
   //--------------------------------------------------------------------------------
   doc: Joi.string()
     .regex(/^[0-9]+$/)

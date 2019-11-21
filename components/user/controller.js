@@ -8,9 +8,6 @@ function addUser(user) {
   if (!user) {
     return Promise.reject("Invalid User");
   }
-  if (user.fullname) {
-    user.fullname = user.fullname.replace(" ", "-");
-  }
   return store.addUser(user);
 }
 
