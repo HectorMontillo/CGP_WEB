@@ -28,7 +28,7 @@
       "methods": ["GET", "POST", "PUT"]
     },
     {
-      "src": "/account/(?<id>[^/]*)/(?<id>[^/]*)",
+      "src": "/account/(?<id>[^/]+)/(?<id>.+)$",
       "dest": "/server.js",
       "methods": ["DELETE"]
     },
