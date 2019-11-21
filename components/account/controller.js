@@ -14,8 +14,16 @@ function addAccount(account, idUser, idGroup) {
   }
   return store.addAccount(account, idUser, idGroup);
 }
+
+function updateAccount(idAccount, updateData) {
+  if (!idAccount) {
+    return Promise.reject("Invalid User");
+  }
+  return store.updateAccount(idAccount, updateData);
+}
 module.exports = {
   listAccounts,
   addAccount,
-  getAccount
+  getAccount,
+  updateAccount
 };

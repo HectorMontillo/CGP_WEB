@@ -4,6 +4,7 @@ const response = require("../../network/response");
 const joiValidation = require("../../network/middleware");
 const joiSchema = require("./validation");
 const controller = require("./controller");
+const mailsender = require("../../network/mailsender");
 
 router.options("*", (req, res) => {
   response.success(req, res, "Bebecita", 200);
@@ -47,6 +48,12 @@ router.post("/", joiValidation(joiSchema, "body"), (req, res) => {
   controller
     .addUser(req.body)
     .then(data => {
+      mailsender.sendMail(
+        data.email,
+        "Bienvenido",
+        "Bienvenido a CGP-WEB",
+        `<h1 style="color:blue;">Bienvenido a CGP-WEB<h1>`
+      );
       response.success(req, res, data, 201);
     })
     .catch(e => {
@@ -81,6 +88,12 @@ router.delete("/:idUser", (req, res) => {
   controller
     .deleteUser(req.params.idUser)
     .then(data => {
+      mailsender.sendMail(
+        data.email,
+        "Hasta luego!!",
+        "Hasta luego!!",
+        `<h1 style="color:blue;">Hasta luego!!<h1>`
+      );
       response.success(req, res, data, 200);
     })
     .catch(e => {

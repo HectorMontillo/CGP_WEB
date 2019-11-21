@@ -99,9 +99,30 @@ function updateUserAccounts(idUser, newIdAccount) {
       });
   });
 }
-
+function updateAccount(idAccount, updateData) {
+  return new Promise((resolve, rejec) => {
+    let filter = {};
+    if (idAccount) {
+      filter = {
+        _id: idAccount
+      };
+    }
+    Model.findOneAndUpdate(filter, { $set: updateData }, { new: true })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(e => {
+        if (e.name == "MongoError" && e.code == "11000") {
+          rejec("Ya existe una cuenta con el mismo nombre!!");
+        } else {
+          rejec(e);
+        }
+      });
+  });
+}
 module.exports = {
   listAccounts,
   addAccount,
-  getAccount
+  getAccount,
+  updateAccount
 };

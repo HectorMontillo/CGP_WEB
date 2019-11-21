@@ -60,4 +60,21 @@ router.post("/:idUser", joiValidation(joiSchema, "body"), (req, res) => {
       );
     });
 });
+
+router.put("/:idAccount", joiValidation(joiSchema, "body"), (req, res) => {
+  controller
+    .updateAccount(req.params.idAccount, req.body)
+    .then(data => {
+      response.success(req, res, data, 200);
+    })
+    .catch(e => {
+      response.error(
+        req,
+        res,
+        e,
+        500,
+        "Ocurrio un error modificando una cuenta"
+      );
+    });
+});
 module.exports = router;
