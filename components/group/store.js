@@ -22,6 +22,21 @@ function listGroups(query, idUser) {
   });
 }
 
+function getGroup(idGroup) {
+  return new Promise((resolve, rejec) => {
+    let filter = {
+      _id: idGroup ? idGroup : ""
+    };
+    Model.find(filter)
+      .then(data => {
+        resolve(data);
+      })
+      .catch(e => {
+        rejec(e);
+      });
+  });
+}
+
 function addGroup(group, idUser) {
   return new Promise((resolve, rejec) => {
     const myGroup = new Model(group);
@@ -61,7 +76,49 @@ function updateUserGroups(idUser, newIdGroup) {
   });
 }
 
+function updateGroup(idGroup, updateData) {
+  return new Promise((resolve, rejec) => {
+    let filter = {};
+    if (idGroup) {
+      filter = {
+        _id: idGroup
+      };
+    }
+    Model.findOneAndUpdate(filter, { $set: updateData }, { new: true })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(e => {
+        rejec(e);
+      });
+  });
+}
+
+function deleteGroup(idGroup, idUser) {
+  return new Promise((resolve, rejec) => {
+    let filterUser = {
+      _id: idUser
+    };
+    userModel
+      .update(filterUser, { $pullAll: { groups: [idGroup] } })
+      .then(data => {
+        Model.findOneAndDelete({ _id: idGroup })
+          .then(data => {
+            resolve(data);
+          })
+          .catch(e => {
+            rejec(e);
+          });
+      })
+      .catch(e => {
+        rejec(e);
+      });
+  });
+}
 module.exports = {
   listGroups,
-  addGroup
+  addGroup,
+  getGroup,
+  updateGroup,
+  deleteGroup
 };

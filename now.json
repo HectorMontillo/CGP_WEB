@@ -23,11 +23,6 @@
       "methods": ["GET", "POST", "PUT"]
     },
     {
-      "src": "/account/(?<id>[^/]*)",
-      "dest": "/server.js",
-      "methods": ["GET", "POST", "PUT"]
-    },
-    {
       "src": "/account/(?<id>[^/]+)/(?<ida>.+)$",
       "dest": "/server.js",
       "methods": ["DELETE"]
@@ -35,9 +30,13 @@
     {
       "src": "/group/(?<id>[^/]*)",
       "dest": "/server.js",
-      "methods": ["GET", "POST"]
+      "methods": ["GET", "POST", "PUT"]
     },
-
+    {
+      "src": "/group/(?<id>[^/]+)/(?<ida>.+)$",
+      "dest": "/server.js",
+      "methods": ["DELETE"]
+    },
     {
       "src": "/(.*)",
       "dest": "/server.js",
