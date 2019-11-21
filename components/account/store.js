@@ -120,9 +120,31 @@ function updateAccount(idAccount, updateData) {
       });
   });
 }
+function deleteAccount(idAccount, idUser) {
+  return new Promise((resolve, rejec) => {
+    let filterUser = {
+      _id: idUser
+    };
+    userModel
+      .update(filterUser, { $pullAll: { accounts: [idAccount] } })
+      .then(data => {
+        Model.findOneAndDelete({ _id: idAccount })
+          .then(data => {
+            resolve(data);
+          })
+          .catch(e => {
+            rejec(e);
+          });
+      })
+      .catch(e => {
+        rejec(e);
+      });
+  });
+}
 module.exports = {
   listAccounts,
   addAccount,
   getAccount,
-  updateAccount
+  updateAccount,
+  deleteAccount
 };

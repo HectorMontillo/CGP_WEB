@@ -77,4 +77,21 @@ router.put("/:idAccount", joiValidation(joiSchema, "body"), (req, res) => {
       );
     });
 });
+
+router.delete("/:idAccount/:idUser", (req, res) => {
+  controller
+    .deleteAccount(req.params.idAccount, req.params.idUser)
+    .then(data => {
+      response.success(req, res, data, 200);
+    })
+    .catch(e => {
+      response.error(
+        req,
+        res,
+        e,
+        500,
+        "Ocurrio un error eliminando una cuenta"
+      );
+    });
+});
 module.exports = router;

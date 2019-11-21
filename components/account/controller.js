@@ -17,13 +17,21 @@ function addAccount(account, idUser, idGroup) {
 
 function updateAccount(idAccount, updateData) {
   if (!idAccount) {
-    return Promise.reject("Invalid User");
+    return Promise.reject("Invalid Account");
   }
   return store.updateAccount(idAccount, updateData);
+}
+
+function deleteAccount(idAccount, idUser) {
+  if (!idAccount | !idUser) {
+    return Promise.reject("Invalid Account");
+  }
+  return store.deleteAccount(idAccount, idUser);
 }
 module.exports = {
   listAccounts,
   addAccount,
   getAccount,
-  updateAccount
+  updateAccount,
+  deleteAccount
 };
