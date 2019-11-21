@@ -3,6 +3,9 @@ const router = express.Router();
 const response = require("../../network/response");
 const controller = require("./controller");
 
+const joiValidation = require("../../network/middleware");
+const joiSchema = require("./validation");
+
 router.options("*", (req, res) => {
   response.success(req, res, "Bebecita", 200);
 });
@@ -19,7 +22,7 @@ router.get("/:idUser", (req, res) => {
         res,
         e,
         500,
-        "Ocurrio un error obteniendo informacion de usuario"
+        "Ocurrio un error obteniendo informacion de cuentas de usuario "
       );
     });
 });
@@ -41,7 +44,7 @@ router.get("/search/:idAccount", (req, res) => {
     });
 });
 
-router.post("/:idUser", (req, res) => {
+router.post("/:idUser", joiValidation(joiSchema, "body"), (req, res) => {
   controller
     .addAccount(req.body, req.params.idUser, req.body.groupId)
     .then(data => {

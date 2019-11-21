@@ -95,7 +95,32 @@ const JoiSchema = Joi.object().keys({
       });
       return errors;
     }),
-  cel: Joi.number().min(10)
+  cel: Joi.string()
+    .regex(/^[0-9]+$/)
+    .min(10)
+    .max(10)
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "Agrega tu número de celular!!";
+            break;
+          case "string.regex.base":
+            err.message = "Tu número de celular es incorrecto";
+            break;
+          case "string.min":
+            err.message = `Tu numero de celular debe contener 10 dígitos`;
+            break;
+          case "string.max":
+            err.message = `Tu numero de celular debe contener 10 dígitos`;
+            break;
+          default:
+            err.message = "Oh oh, prueba de otra manera!!";
+            break;
+        }
+      });
+      return errors;
+    })
 });
 
 module.exports = JoiSchema;
