@@ -52,7 +52,70 @@ router.post("/", joiValidation(joiSchema, "body"), (req, res) => {
         data.email,
         "Bienvenido",
         "Bienvenido a CGP-WEB",
-        `<h1 style="color:blue;">Bienvenido a CGP-WEB<h1>`
+        `<!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+            <title>Document</title>
+        
+            <style>
+              .container {
+                width: 90%;
+                margin: 0 auto;
+                background-color: #f7f7f7;
+                flex-direction: column;
+                color: #6a6666;
+                font-family: sans-serif;
+                text-align: center;
+              }
+              .container img {
+                width: 80px;
+              }
+              .container h2 {
+                color: #6a6666;
+                font-family: sans-serif;
+              }
+              .container a {
+                margin: 10px 0;
+              }
+              .end {
+                align-self: baseline;
+                margin-bottom: 0;
+              }
+        
+              .end span {
+                color: #4d70fd;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <img
+                src="https://media.discordapp.net/attachments/641495045731778562/647174012463480862/Grupo_1302x.png"
+                alt=""
+              />
+              <h2>Bienvenido a CGP-WEB ${data.fullname}</h2>
+              <p>
+                Gracias por confiar en CGP-WEB para llevar el control de tus gastos
+                personales
+              </p>
+              <p>
+                Para ingresar a nuestra plataforma puedes hacerlo a traves del sigueinte
+                link:
+              </p>
+              <a href="https://cgp-web.now.sh/"
+                >Empezar ya!!
+              >
+              <br />
+              <i>Cuida de los pequeños gastos, un pequeño agujero hunde un barco</i>
+        
+              <p class="end">Feliz manejo de tus gastos</p>
+              <p class="end">Team <span>CGP-WEB</span></p>
+            </div>
+          </body>
+        </html>`
       );
       response.success(req, res, data, 201);
     })

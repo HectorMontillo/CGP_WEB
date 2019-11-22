@@ -46,6 +46,22 @@ function addGroup(group, idUser) {
         updateUserGroups(idUser, data._id)
           .then(update => {
             resolve(data);
+            /*
+            calcBalanceForAdd(data._id)
+              .then(balance => {
+                updateGroup(data._id, {
+                  balance: balance
+                })
+                  .then(gr => {
+                    resolve(gr);
+                  })
+                  .catch(e => {
+                    rejec(e);
+                  });
+              })
+              .catch(e => {
+                rejec(e);
+              });*/
           })
           .catch(e => {
             rejec(e);
@@ -53,6 +69,30 @@ function addGroup(group, idUser) {
       })
       .catch(e => {
         rejec(e);
+      });
+  });
+}
+
+function calcBalanceForAdd(idGroup) {
+  return new Promise((resolve, rejec) => {
+    myGroup
+      .find({
+        _id: idGroup
+      })
+      .populate("accounts")
+      .exec((err, data) => {
+        if (err) {
+          console.log("hola" + err);
+          rejec(err);
+        } else {
+          let acc = data[0].accounts;
+          let bal = 0;
+          acc.forEach(ele => {
+            bal += acc.savingAccount.balance;
+          });
+          console.log("balance" + bal);
+          resolve(bal);
+        }
       });
   });
 }
