@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const mySchema = new Schema({
+const schema = new Schema({
   name: {
     type: String,
     required: true
@@ -48,14 +48,15 @@ const mySchema = new Schema({
   currency: {
     type: Schema.ObjectId,
     ref: "Currency"
-  },
+  }
+  /*
   transactions: [
     {
       type: Schema.ObjectId,
       ref: "Transaction"
     }
-  ]
+  ]*/
 });
 
-const model = mongoose.model("Account", mySchema);
-module.exports = model;
+//const model = mongoose.model("Account", schema);
+module.exports = schema;

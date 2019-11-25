@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
-const Joi = require("joi");
-/*
-const JoiSchema = Joi.object().keys({
-  fullname: Joi.string().regex()
-})*/
+const accountSchema = require("../account/model");
+const groupSchema = require("../group/model");
 
 const Schema = mongoose.Schema;
-const mySchema = new Schema({
+const schema = new Schema({
   fullname: {
     type: String,
     required: true
@@ -26,19 +23,9 @@ const mySchema = new Schema({
     required: true
   },
   cel: String,
-  accounts: [
-    {
-      type: Schema.ObjectId,
-      ref: "Account"
-    }
-  ],
+  accounts: [accountSchema],
 
-  groups: [
-    {
-      type: Schema.ObjectId,
-      ref: "Group"
-    }
-  ]
+  groups: [groupSchema]
   /*
   budgets: [
     {
@@ -54,5 +41,8 @@ const mySchema = new Schema({
   ]*/
 });
 
-const model = mongoose.model("User", mySchema);
-module.exports = model;
+const model = mongoose.model("User", schema);
+module.exports = {
+  model,
+  schema
+};

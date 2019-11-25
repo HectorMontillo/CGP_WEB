@@ -1,34 +1,10 @@
-const Model = require("./model");
-const userModel = require("../user/model");
-const groupModel = require("../group/model");
+const accountShema = require("./model");
+const userModel = require("../user/model").model;
 
 function listAccounts(query, idUser) {
   return new Promise((resolve, rejec) => {
-    let filter = {};
-    if (idUser) {
-      filter = {
-        _id: idUser
-      };
-    }
     userModel
-      .find(filter)
-      .populate("accounts")
-      .exec((err, data) => {
-        if (err) {
-          rejec(err);
-        } else {
-          resolve(data[0].accounts);
-        }
-      });
-  });
-}
-
-function getAccount(idAccount) {
-  return new Promise((resolve, rejec) => {
-    let filter = {
-      _id: idAccount ? idAccount : ""
-    };
-    Model.find(filter)
+      .find({ _id: idUser }, "accounts")
       .then(data => {
         resolve(data);
       })
@@ -38,6 +14,21 @@ function getAccount(idAccount) {
   });
 }
 
+async function addAccount(account, idUser, idGroup) {
+  return new Promise((resolve, rejec) => {
+    try{
+      const data = await userModel.update(
+        { _id: idUser}, 
+        { $push: { accounts:  new accountShema(account)} }
+        );
+      resolve(data)
+    }catch(e){
+      rejec(e)
+    }
+  });
+}
+
+/*
 function addAccount(account, idUser, idGroup) {
   return new Promise((resolve, rejec) => {
     const myAccount = new Model(account);
@@ -60,7 +51,9 @@ function addAccount(account, idUser, idGroup) {
       });
   });
 }
+*/
 
+/*
 function updateGroupAccounts(idGroup, newIdAccount) {
   return new Promise((resolve, rejec) => {
     let filter = {};
@@ -80,7 +73,9 @@ function updateGroupAccounts(idGroup, newIdAccount) {
         rejec(e);
       });
   });
-}
+}*/
+
+/*
 function updateUserAccounts(idUser, newIdAccount) {
   return new Promise((resolve, rejec) => {
     let filter = {};
@@ -98,7 +93,28 @@ function updateUserAccounts(idUser, newIdAccount) {
         rejec(e);
       });
   });
+}*/
+//Es necesario modificar hacia atras argumento idUser
+function updateAccount(idUser, idAccount, updateData) {
+  return new Promise((resolve, rejec) => {
+    Model.findOneAndUpdate(
+      {_id: idUser, "accounts._id": idAccount}, 
+      { $set: {
+        "accounts.$": updateData
+      } })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(e => {
+        if (e.name == "MongoError" && e.code == "11000") {
+          rejec("Ya existe una cuenta con el mismo nombre!!");
+        } else {
+          rejec(e);
+        }
+      });
+  });
 }
+/*
 function updateAccount(idAccount, updateData) {
   return new Promise((resolve, rejec) => {
     let filter = {};
@@ -119,7 +135,20 @@ function updateAccount(idAccount, updateData) {
         }
       });
   });
+}*/
+function deleteAccount(idAccount, idUser) {
+  return new Promise((resolve, rejec) => {
+    userModel
+      .findOneAndDelete({_id: idUser, "accounts._id": idAccount})
+      .then(data => {
+        resolve(data)
+      })
+      .catch(e => {
+        rejec(e);
+      });
+  });
 }
+/*
 function deleteAccount(idAccount, idUser) {
   return new Promise((resolve, rejec) => {
     let filterUser = {
@@ -140,11 +169,11 @@ function deleteAccount(idAccount, idUser) {
         rejec(e);
       });
   });
-}
+}*/
 module.exports = {
   listAccounts,
   addAccount,
-  getAccount,
-  updateAccount,
+  //getAccount,
+ updateAccount,
   deleteAccount
 };

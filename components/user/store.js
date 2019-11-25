@@ -1,5 +1,5 @@
 //const mongoose = require("mongoose");
-const Model = require("./model");
+const Model = require("./model").model;
 
 function listUsers(query) {
   return new Promise((resolve, rejec) => {
