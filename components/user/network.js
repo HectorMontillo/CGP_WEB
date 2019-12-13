@@ -52,8 +52,11 @@ router.get("/recoverpassword/:idUser", (req, res) => {
         mailsender.sendMail(
           data[0].email,
           "Recuperar contraseña",
-          "Solicitud de recuperación de contraseña",
-          `<h1>Hola mundo ${data[0].fullname}</h1>`
+          `
+          Bienvenido ${data[0].fullname}
+          Ya puedes recuperar tu contraseña, ingresa en el siguiente link
+          cgp-web.now.sh/change/${data[0]._id}
+          `
         );
         response.success(req, res, "Correo enviado!!", 200);
       } else {

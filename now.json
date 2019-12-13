@@ -53,6 +53,16 @@
       "methods": ["DELETE"]
     },
     {
+      "src": "/transaction/(?<id>[^/]*)",
+      "dest": "/server.js",
+      "methods": ["GET", "POST"]
+    },
+    {
+      "src": "/transaction/search/(?<id>[^/]*)",
+      "dest": "/server.js",
+      "methods": ["GET"]
+    },
+    {
       "src": "/(.*)",
       "dest": "/server.js",
       "headers": {

@@ -22,8 +22,10 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "joi": "^14.3.1",
+    "mailgun-js": "^0.22.0",
     "mongoose": "^5.7.5",
     "nodemailer": "^6.3.1",
+    "nodemailer-mailgun-transport": "^1.4.0",
     "now": "^16.3.1"
   },
   "devDependencies": {
