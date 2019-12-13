@@ -44,6 +44,34 @@ router.get("/:idUser", (req, res) => {
     });
 });
 
+router.get("/recoverpassword/:idUser", (req, res) => {
+  controller
+    .getUser(req.params.idUser)
+    .then(data => {
+      if (data[0].email) {
+        mailsender.sendMail(
+          data[0].email,
+          "Recuperar contraseña",
+          "Solicitud de recuperación de contraseña",
+          `<h1>Hola mundo ${data[0].fullname}</h1>`
+        );
+        response.success(req, res, "Correo enviado!!", 200);
+      } else {
+        response.error(req, res, "A error", 500, "No existe el usuario");
+      }
+    })
+    .catch(e => {
+      console.log(e);
+      response.error(
+        req,
+        res,
+        e,
+        500,
+        "Ocurrio un error buscando recuperando una contraseña"
+      );
+    });
+});
+
 router.post("/", joiValidation(joiSchema, "body"), (req, res) => {
   controller
     .addUser(req.body)

@@ -18,6 +18,11 @@
       "methods": ["GET", "DELETE", "PUT"]
     },
     {
+      "src": "/user/recoverpassword/(?<id>[^/]*)",
+      "dest": "/server.js",
+      "methods": ["GET"]
+    },
+    {
       "src": "/account/(?<id>[^/]*)",
       "dest": "/server.js",
       "methods": ["GET", "POST", "PUT"]
